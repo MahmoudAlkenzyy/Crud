@@ -62,7 +62,7 @@
             <div class="container">
                 <div class="row overflow-x-auto">
                     <table class="w-100">
-                        <thead class="text-white">
+                        <thead class="text-white text-uppercase">
                             <tr>
                                 <th>Id</th>
                                 <th>Title</th>
@@ -93,7 +93,13 @@
                                         ></i>
                                     </button>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <button class="btn">
+                                        <i
+                                            class="fa-regular fa-trash-can bg-danger"
+                                        ></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -101,10 +107,10 @@
             </div>
         </section>
         <!------------------------------------ End Home Section ---------------------------------------->
+        <!------------------------------------ Start sidebar Section ---------------------------------------->
 
         <section
-            id="sideBar"
-            class="offcanvas offcanvas-start"
+            class="offcanvas offcanvas-start show"
             tabindex="-1"
             id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel"
@@ -137,12 +143,14 @@
                                 name="price"
                                 placeholder="Price"
                                 class="col-md-5"
+                                onkeyup="getTotal()"
                             />
                             <input
                                 type="number"
                                 id="taxes"
                                 name="taxes"
                                 placeholder="Taxces"
+                                onkeyup="getTotal()"
                                 class="col-md-5"
                             />
                             <input
@@ -150,6 +158,7 @@
                                 id="ads"
                                 name="ads"
                                 placeholder="Ads"
+                                onkeyup="getTotal()"
                                 class="col-md-5"
                             />
                             <input
@@ -157,6 +166,7 @@
                                 id="discount"
                                 name="discount"
                                 placeholder="Discount"
+                                onkeyup="getTotal()"
                                 class="col-md-5"
                             />
                             <span class="col-md-11"

@@ -45,6 +45,7 @@ submit.onclick = function () {
     productDate.push(newProduct)
     localStorage.setItem('product', JSON.stringify(productDate))
     clearData()
+    ReadData()
 }
 // cleare input
 function clearData() {
@@ -57,3 +58,33 @@ function clearData() {
     count.value = ''
     category.value = ''
 }
+//Read data
+function ReadData() {
+    let table = ''
+    for (let i = 0; i < productDate.length; i++) {
+        table += ` <tr>
+        <td>${i}</td>
+            <td>${productDate[i].title}</td>
+            <td>${productDate[i].price}</td>
+            <td>${productDate[i].taxes}</td>
+            <td>${productDate[i].ads}</td>
+            <td>${productDate[i].discount}</td>
+            <td>${productDate[i].total}</td>
+            <td>${productDate[i].category}</td>
+            
+            <td>
+                <button class="btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                    </td>
+                    <td>
+                    <button class="btn">
+                    <i class="fa-regular fa-trash-can bg-danger"></i>
+                    </button>
+                    </td>
+                    </tr>`
+
+        document.getElementById('tbody').innerHTML = table
+    }
+}
+ReadData()

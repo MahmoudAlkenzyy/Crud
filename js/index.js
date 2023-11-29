@@ -79,7 +79,7 @@ function ReadData() {
                     </td>
                     <td>
                     <button class="btn">
-                    <i class="fa-regular fa-trash-can bg-danger"></i>
+                    <i onClick={DeleteProduct(${i})} class="fa-regular fa-trash-can bg-danger delete-btn"></i>
                     </button>
                     </td>
                     </tr>`
@@ -88,3 +88,12 @@ function ReadData() {
     }
 }
 ReadData()
+
+// Delete Product
+
+function DeleteProduct(i) {
+    productDate.splice(i, 1)
+    localStorage.product = JSON.stringify(productDate)
+    ReadData()
+    console.log('kkkk', i)
+}

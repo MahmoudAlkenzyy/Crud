@@ -23,3 +23,26 @@ function getTotal() {
         total.innerHTML = ''
     }
 }
+// Create Product
+
+let productDate
+if (localStorage.product != null) {
+    productDate = JSON.parse(localStorage.product)
+} else {
+    productDate = []
+}
+submit.onclick = function () {
+    let newProduct = {
+        title: title.value,
+        price: price.value,
+        taxes: taxes.value,
+        ads: ads.value,
+        discount: discount.value,
+        total: total.innerHTML,
+        count: count.value,
+        category: category.value,
+    }
+    productDate.push(newProduct)
+    localStorage.setItem('product', JSON.stringify(productDate))
+    console.log(productDate)
+}

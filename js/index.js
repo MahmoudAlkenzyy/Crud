@@ -44,5 +44,16 @@ submit.onclick = function () {
     }
     productDate.push(newProduct)
     localStorage.setItem('product', JSON.stringify(productDate))
-    console.log(productDate)
+    clearData()
+}
+// cleare input
+function clearData() {
+    title.value = ''
+    price.value = ''
+    taxes.value = ''
+    ads.value = ''
+    discount.valxue = ''
+    total.innerHTML = ''
+    count.value = ''
+    category.value = ''
 }

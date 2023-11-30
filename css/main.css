@@ -16,7 +16,8 @@ nav::after {
     left: 0;
     margin-bottom: 10px;
 }
-nav button {
+
+nav .btn {
     font-size: 14px !important;
     background-color: var(--main-color) !important;
     color: white !important;
@@ -81,4 +82,8 @@ nav button:hover {
     color: #dc3545 !important;
     background-color: white !important;
     border: 1px solid #dc3545 !important;
+}
+.lel {
+    cursor: grab;
+    overflow: auto;
 }

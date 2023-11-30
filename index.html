@@ -40,12 +40,14 @@
                         type="text"
                         placeholder="Search"
                     />
-                    <button class="col-lg-2 btn py-2">Search By Title</button>
-                    <button class="col-lg-2 btn py-2">
-                        Search By Category
+                    <button class="col-lg-2 btn px-1 py-2">
+                        <i class="fa fa-search"></i> By Title
+                    </button>
+                    <button class="col-lg-2 btn px-1 py-2">
+                        <i class="fa fa-search"></i> By Category
                     </button>
                     <button
-                        class="btn col-lg-2 py-2"
+                        class="btn col-lg-2 px-1 py-2"
                         type="button"
                         data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasExample"
@@ -60,7 +62,8 @@
         <!------------------------------------ Start Home Section ---------------------------------------->
         <section id="body" class="body py-4 text-center">
             <div class="container">
-                <div class="row overflow-x-auto">
+                <div id="tableScroll" class="row lel">
+                    <div id="deleteAll"></div>
                     <table class="w-100">
                         <thead class="text-white text-uppercase">
                             <tr>
@@ -85,7 +88,7 @@
         <!------------------------------------ Start sidebar Section ---------------------------------------->
 
         <section
-            class="offcanvas offcanvas-start show"
+            class="offcanvas offcanvas-start"
             tabindex="-1"
             id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel"
@@ -97,20 +100,21 @@
                 <button
                     type="button"
                     class="btn-close"
-                    data-bs-dimdiss="offcanvas"
+                    data-bs-dismiss="offcanvas"
                     aria-label="Close"
+                    aria-controls="offcanvasExample"
                 ></button>
             </div>
             <div class="offcanvas-body">
                 <div class="conatiner">
-                    <form action="">
+                    <form action="" class="py-1">
                         <div class="row g-3 justify-content-around">
                             <input
                                 type="text"
                                 id="title"
                                 name="title"
                                 placeholder="Title"
-                                class="col-11"
+                                class="col-sm-11"
                             />
                             <input
                                 type="number"

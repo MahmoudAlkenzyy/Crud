@@ -8,7 +8,11 @@ let count = document.getElementById('count');
 let category = document.getElementById('category');
 let submit = document.getElementById('submit');
 let deleteAll = document.getElementById('deleteAll');
-// get total
+let sideBar = document.getElementById('offcanvasExample');
+let goUp = document.getElementById('goUp');
+let mood = 'create';
+let index;
+/////////// get total
 function getTotal() {
     if (price.value != '') {
         let result =
@@ -23,13 +27,13 @@ function getTotal() {
         total.innerHTML = '';
     }
 }
-// Create Product
+/////////// Create Product
 
-let productDate;
+let productData;
 if (localStorage.product != null) {
-    productDate = JSON.parse(localStorage.product);
+    productData = JSON.parse(localStorage.product);
 } else {
-    productDate = [];
+    productData = [];
 }
 submit.onclick = function () {
     let newProduct = {
@@ -42,12 +46,26 @@ submit.onclick = function () {
         count: count.value,
         category: category.value,
     };
-    productDate.push(newProduct);
-    localStorage.setItem('product', JSON.stringify(productDate));
+
+    if (mood === 'create') {
+        if (newProduct.count > 1) {
+            for (let i = 0; newProduct.count > i; i++) {
+                productData.push(newProduct);
+            }
+        } else {
+            productData.push(newProduct);
+        }
+    } else {
+        productData[index] = newProduct;
+        mood = 'create';
+        submit.innerHTML = 'Create';
+        count.style.display = 'block';
+    }
+    localStorage.setItem('product', JSON.stringify(productData));
     clearData();
     ReadData();
 };
-// cleare input
+/////////// cleare input
 function clearData() {
     title.value = '';
     price.value = '';
@@ -58,22 +76,25 @@ function clearData() {
     count.value = '';
     category.value = '';
 }
-//Read data
+///////////Read data
 function ReadData() {
     let table = '';
-    for (let i = 0; i < productDate.length; i++) {
+    for (let i = 0; i < productData.length; i++) {
         table += ` <tr>
         <td>${i}</td>
-            <td>${productDate[i].title}</td>
-            <td>${productDate[i].price}</td>
-            <td>${productDate[i].taxes}</td>
-            <td>${productDate[i].ads}</td>
-            <td>${productDate[i].discount}</td>
-            <td>${productDate[i].total}</td>
-            <td>${productDate[i].category}</td>
+            <td>${productData[i].title}</td>
+            <td>${productData[i].price}</td>
+            <td>${productData[i].taxes}</td>
+            <td>${productData[i].ads}</td>
+            <td>${productData[i].discount}</td>
+            <td>${productData[i].total}</td>
+            <td>${productData[i].category}</td>
             
             <td>
-                <button class="btn">
+                <button onClick="updateData(${i})"  
+                 data-bs-toggle="offcanvas"
+                 data-bs-target="#offcanvasExample"
+                 aria-controls="offcanvasExample" class="btn">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </button>
                     </td>
@@ -85,23 +106,22 @@ function ReadData() {
                     </tr>`;
     }
     document.getElementById('tbody').innerHTML = table;
-    productDate.length > 0
-        ? (deleteAll.innerHTML =
-              '  <button class="btn delete-all-btn delete-btn w-50 mb-3 bg-danger text-white rounded-4" onclick="deletAll()"> Delete All </button>')
+    productData.length > 0
+        ? (deleteAll.innerHTML = ` <button class="btn delete-all-btn delete-btn w-50 mb-3 bg-danger text-white rounded-4" onclick="deletAll()"> Delete All (${productData.length}) </button>`)
         : 'deleteAll.innerHTML =""';
 }
 ReadData();
 
-// Delete Product
+/////////// Delete Product
 
 function DeleteProduct(i) {
-    productDate.splice(i, 1);
-    localStorage.product = JSON.stringify(productDate);
+    productData.splice(i, 1);
+    localStorage.product = JSON.stringify(productData);
     ReadData();
     console.log('kkkk', i);
 }
 
-// Make table scrollable
+/////////// Make table scrollable
 document.addEventListener('DOMContentLoaded', function () {
     const ele = document.getElementById('tableScroll');
     ele.style.cursor = 'grab';
@@ -115,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
         pos = {
             left: ele.scrollLeft,
             top: ele.scrollTop,
-            // Get the current mouse position
+            /////////// Get the current mouse position
             x: e.clientX,
             y: e.clientY,
         };
@@ -125,11 +145,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     const mouseMoveHandler = function (e) {
-        // How far the mouse has been moved
+        /////////// How far the mouse has been moved
         const dx = e.clientX - pos.x;
         const dy = e.clientY - pos.y;
 
-        // Scroll the element
+        /////////// Scroll the element
         ele.scrollTop = pos.top - dy;
         ele.scrollLeft = pos.left - dx;
     };
@@ -142,12 +162,28 @@ document.addEventListener('DOMContentLoaded', function () {
         document.removeEventListener('mouseup', mouseUpHandler);
     };
 
-    // Attach the handler
+    /////////// Attach the handler
     ele.addEventListener('mousedown', mouseDownHandler);
 });
-// delete All
+/////////// delete All
 function deletAll() {
-    productDate.splice(0);
+    productData.splice(0);
 
     ReadData();
+}
+///////////update Data
+function updateData(i) {
+    title.value = productData[i].title;
+    price.value = productData[i].price;
+    ads.value = productData[i].ads;
+    taxes.value = productData[i].taxes;
+    discount.value = productData[i].discount;
+    category.value = productData[i].category;
+    console.log(productData[i]);
+    getTotal();
+    count.style.display = 'none';
+    submit.innerHTML = 'update';
+    mood = 'update';
+    index = i;
+    scroll({ top: 0, behavior: 'smooth' });
 }

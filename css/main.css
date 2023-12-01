@@ -17,11 +17,13 @@ nav::after {
     margin-bottom: 10px;
 }
 
-nav .btn {
+nav .btn,
+#goUp {
     font-size: 14px !important;
     background-color: var(--main-color) !important;
     color: white !important;
     transition: 0.3s !important;
+    border: var(--main-color);
 }
 form input,
 .search {
@@ -72,8 +74,7 @@ table i {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-table i:hover,
-nav button:hover {
+:is(table i, nav button, #goUp):hover {
     color: var(--main-color) !important;
     background-color: white !important;
     border: 1px solid var(--main-color) !important;
@@ -84,6 +85,12 @@ nav button:hover {
     border: 1px solid #dc3545 !important;
 }
 .lel {
-    cursor: grab;
     overflow: auto;
+}
+#goUp {
+    right: 10px;
+    bottom: 10px;
+    position: fixed;
+    font-size: 14px;
+    border: 1px solid;
 }

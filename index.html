@@ -62,9 +62,9 @@
         <!------------------------------------ Start Home Section ---------------------------------------->
         <section id="body" class="body py-4 text-center">
             <div class="container">
-                <div id="tableScroll" class="row lel">
-                    <div id="deleteAll"></div>
-                    <table class="w-100">
+                <div id="deleteAll"></div>
+                <div class="row lel">
+                    <table id="tableScroll" class="w-100">
                         <thead class="text-white text-uppercase">
                             <tr>
                                 <th>Id</th>
@@ -156,6 +156,7 @@
 
                             <input
                                 type="number"
+                                min="0"
                                 name="count"
                                 id="count"
                                 placeholder="count"
@@ -180,6 +181,10 @@
                 </div>
             </div>
         </section>
+
+        <button id="goUp" class="btn btn-primary rounded-circle">
+            <i class="fa fa-arrow-up"></i>
+        </button>
 
         <script src="./js/bootstrap.bundle.min.js"></script>
         <script src="./js/index.js"></script>

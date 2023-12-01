@@ -33,6 +33,7 @@ function getTotal() {
 /////////// Create Product
 
 let productData;
+
 if (localStorage.product != null) {
     productData = JSON.parse(localStorage.product);
 } else {
@@ -50,22 +51,32 @@ submit.onclick = function () {
         category: category.value,
     };
 
-    if (mood === 'create') {
-        if (newProduct.count > 1) {
-            for (let i = 0; newProduct.count > i; i++) {
+    if (
+        title.value != '' &&
+        price.value != '' &&
+        category.value != '' &&
+        newProduct.count <= 100 &&
+        0 < newProduct.count
+    ) {
+        if (mood === 'create') {
+            if (newProduct.count > 1) {
+                for (let i = 0; newProduct.count > i; i++) {
+                    productData.push(newProduct);
+                }
+            } else {
                 productData.push(newProduct);
             }
         } else {
-            productData.push(newProduct);
+            productData[index] = newProduct;
+            mood = 'create';
+            submit.innerHTML = 'Create';
+            count.style.display = 'block';
         }
-    } else {
-        productData[index] = newProduct;
-        mood = 'create';
-        submit.innerHTML = 'Create';
-        count.style.display = 'block';
+        clearData();
     }
+    //save in local storage
     localStorage.setItem('product', JSON.stringify(productData));
-    clearData();
+
     ReadData();
 };
 /////////// cleare input
@@ -74,7 +85,7 @@ function clearData() {
     price.value = '';
     taxes.value = '';
     ads.value = '';
-    discount.valxue = '';
+    discount.value = '';
     total.innerHTML = '';
     count.value = '';
     category.value = '';
@@ -84,7 +95,7 @@ function ReadData() {
     let table = '';
     for (let i = 0; i < productData.length; i++) {
         table += ` <tr>
-        <td>${i}</td>
+        <td>${i + 1}</td>
             <td>${productData[i].title}</td>
             <td>${productData[i].price}</td>
             <td>${productData[i].taxes}</td>

@@ -10,7 +10,9 @@ let submit = document.getElementById('submit');
 let deleteAll = document.getElementById('deleteAll');
 let sideBar = document.getElementById('offcanvasExample');
 let goUp = document.getElementById('goUp');
+let searchInput = document.getElementById('search');
 let mood = 'create';
+let searchMood = 'title';
 let scrollPosition = scrollY;
 let index;
 /////////// get total
@@ -189,9 +191,99 @@ function updateData(i) {
     scroll({ top: 0, behavior: 'smooth' });
 }
 
+// Go Up Botton
 window.addEventListener('scroll', (e) => {
     goUp.style.display = window.scrollY < 100 ? 'none' : 'block';
 });
 goUp.onclick = function () {
     scroll({ top: 0, behavior: 'smooth' });
 };
+
+// Search By (Title , Category)
+function search(id) {
+    if (id === 'searchByTitle') {
+        searchMood = 'title';
+    } else {
+        searchMood = 'category';
+    }
+    searchInput.placeholder = `Search By ${searchMood}`;
+
+    searchInput.focus();
+    searchInput.value = '';
+    ReadData();
+}
+
+function searchData(value) {
+    let table = '';
+    for (i = 0; i < productData.length; i++) {
+        switch (searchMood) {
+            case 'title':
+                if (
+                    productData[i].title
+                        .toLowerCase()
+                        .includes(value.toLowerCase())
+                ) {
+                    table += ` <tr>
+        <td>${i}</td>
+            <td>${productData[i].title}</td>
+            <td>${productData[i].price}</td>
+            <td>${productData[i].taxes}</td>
+            <td>${productData[i].ads}</td>
+            <td>${productData[i].discount}</td>
+            <td>${productData[i].total}</td>
+            <td>${productData[i].category}</td>
+
+            <td>
+                <button onClick="updateData(${i})"
+                 data-bs-toggle="offcanvas"
+                 data-bs-target="#offcanvasExample"
+                 aria-controls="offcanvasExample" class="btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                    </td>
+                    <td>
+                    <button class="btn">
+                    <i onClick={DeleteProduct(${i})} class="fa-regular fa-trash-can bg-danger delete-btn"></i>
+                    </button>
+                    </td>
+                    </tr>`;
+                }
+
+                break;
+            case 'category':
+                if (
+                    productData[i].category
+                        .toLowerCase()
+                        .includes(value.toLowerCase())
+                ) {
+                    table += ` <tr>
+        <td>${i}</td>
+            <td>${productData[i].title}</td>
+            <td>${productData[i].price}</td>
+            <td>${productData[i].taxes}</td>
+            <td>${productData[i].ads}</td>
+            <td>${productData[i].discount}</td>
+            <td>${productData[i].total}</td>
+            <td>${productData[i].category}</td>
+
+            <td>
+                <button onClick="updateData(${i})"
+                 data-bs-toggle="offcanvas"
+                 data-bs-target="#offcanvasExample"
+                 aria-controls="offcanvasExample" class="btn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                    </td>
+                    <td>
+                    <button class="btn">
+                    <i onClick={DeleteProduct(${i})} class="fa-regular fa-trash-can bg-danger delete-btn"></i>
+                    </button>
+                    </td>
+                    </tr>`;
+                }
+
+                break;
+        }
+    }
+    document.getElementById('tbody').innerHTML = table;
+}

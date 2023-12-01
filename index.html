@@ -38,12 +38,21 @@
                         id="search"
                         name="search"
                         type="text"
-                        placeholder="Search"
+                        onkeyup="searchData(this.value)"
+                        placeholder="Search By Title"
                     />
-                    <button class="col-lg-2 btn px-1 py-2">
+                    <button
+                        onclick="search(this.id)"
+                        id="searchByTitle"
+                        class="col-lg-2 btn px-1 py-2"
+                    >
                         <i class="fa fa-search"></i> By Title
                     </button>
-                    <button class="col-lg-2 btn px-1 py-2">
+                    <button
+                        onclick="search(this.id)"
+                        id="searchByCategory"
+                        class="col-lg-2 btn px-1 py-2"
+                    >
                         <i class="fa fa-search"></i> By Category
                     </button>
                     <button

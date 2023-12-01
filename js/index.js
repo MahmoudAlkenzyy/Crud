@@ -11,6 +11,7 @@ let deleteAll = document.getElementById('deleteAll');
 let sideBar = document.getElementById('offcanvasExample');
 let goUp = document.getElementById('goUp');
 let mood = 'create';
+let scrollPosition = scrollY;
 let index;
 /////////// get total
 function getTotal() {
@@ -187,3 +188,10 @@ function updateData(i) {
     index = i;
     scroll({ top: 0, behavior: 'smooth' });
 }
+
+window.addEventListener('scroll', (e) => {
+    goUp.style.display = window.scrollY < 100 ? 'none' : 'block';
+});
+goUp.onclick = function () {
+    scroll({ top: 0, behavior: 'smooth' });
+};

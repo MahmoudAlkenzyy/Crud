@@ -18,7 +18,8 @@ nav::after {
 }
 
 nav .btn,
-#goUp {
+#goUp,
+#submit {
     font-size: 14px !important;
     background-color: var(--main-color) !important;
     color: white !important;
@@ -74,7 +75,7 @@ table i {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-:is(table i, nav button, #goUp):hover {
+:is(table i, nav button, #goUp, #submit):hover {
     color: var(--main-color) !important;
     background-color: white !important;
     border: 1px solid var(--main-color) !important;

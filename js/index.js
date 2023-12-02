@@ -55,8 +55,7 @@ submit.onclick = function () {
         title.value != '' &&
         price.value != '' &&
         category.value != '' &&
-        newProduct.count <= 100 &&
-        0 < newProduct.count
+        newProduct.count <= 100
     ) {
         if (mood === 'create') {
             if (newProduct.count > 1) {
